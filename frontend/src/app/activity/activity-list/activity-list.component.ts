@@ -21,7 +21,10 @@ import {
 import {
   Age
 } from 'src/app/interfaces/age';
-import { Router, RouterLink, RouterOutlet,NavigationExtras } from '@angular/router';
+import {
+  Router,
+  NavigationExtras
+} from '@angular/router';
 
 @Component({
   selector: 'app-activity-list',
@@ -94,7 +97,7 @@ export class ActivityListComponent implements OnInit {
     this.lng = lng;
   }
 
-  // FUNCTION TO FILTER BY SOMETHING ANCHOR essayer de faire une new map
+  // FUNCTION TO FILTER BY SOMETHING 
   public filterBy(filtre: number, map: any, age: number) {
     this.http.get < PointInteret[] > (BASE_URL + `/filter/pis/${filtre}/${age}/`, {
         withCredentials: true
@@ -112,30 +115,9 @@ export class ActivityListComponent implements OnInit {
         // }
         // this.showCategorieName(this.categorieSelected)
         // this.showAgeName(this.ageSelected)
-        const centre = {
-          lat: 46.77668,
-          lng: 3.07722
-        }
-        this.map = L.map('map').setView(centre, 5);
-        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-          maxZoom: 20,
-        }).addTo(this.map);
-        this.map.on('click', (e: L.LeafletMouseEvent) => {
-          this.lat = e.latlng.lat;
-          this.lng = e.latlng.lng;
-        })
-        this.recuperationPointInteretService(this.map, filtre)
-        L.icon({
-          iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
-        });
-        for (const d of response) {
-          const marker = L.marker([d.lat, d.lng]).addTo(this.map);
-          marker.bindPopup(d.title).openPopup();
-        }
       })
-      
+
   }
-  // FUNCTION PRINT TOTAL LIST PI
 
   // Affichage de tous les PI
   public printListPiService(map: any) {
@@ -151,20 +133,6 @@ export class ActivityListComponent implements OnInit {
       })
   }
 
-  recuperationPointInteretService(map: any, filtre: number) {
-    this.piService.printListPi()
-      .subscribe({
-        next: (pi => {
-          for (const d of pi) {
-            const marker = L.marker([d.lat, d.lng], {
-              icon: this.icoNew
-            }).addTo(this.map);
-            marker.bindPopup(d.title).openPopup();
-          }
-        })
-      })
-  }
-
   // RECHERCHE EN TAPANT L'ADRESSE
   public async geocode(adresse: any, map: any) {
     this.address = adresse
@@ -175,8 +143,6 @@ export class ActivityListComponent implements OnInit {
     const lng = (datas[0].lon)
     this.lat = lat
     this.lng = lng
-
-
     L.circle([this.lat, this.lng], {
       color: 'red',
       fillColor: '#f03',
@@ -187,47 +153,14 @@ export class ActivityListComponent implements OnInit {
     map.setView([this.lat, this.lng], 8);
   }
 
-  public showCategorie() {
-    this.http.get < Categorie[] > (BASE_URL + `/categories`, {
-        withCredentials: true
-      })
-      .subscribe((response: Categorie[]) => {
-        this.categories = response
-      })
-  }
-  showCategorieName(id:number){
-    this.http.get < Categorie[] > (BASE_URL + `/categorie/${id}/`, {
-      withCredentials: true
-    })
-    .subscribe((response: Categorie[]) => {
-      console.log(response, "= cat")
-      this.categorieName = response
-    })
-  }
-  public showAge() {
-    this.http.get < Age[] > (BASE_URL + `/ages`, {
-        withCredentials: true
-      })
-      .subscribe((response: Age[]) => {
-        this.ages = response
-      })
-  }
+
   public selectResult(filtre: number, age: number) {
     this.categorieSelected = filtre
     this.filterBy(filtre, this.map, age)
   }
 
-  showAgeName(id:number){
-    this.http.get < Age[] > (BASE_URL + `/age/${id}/`, {
-      withCredentials: true
-    })
-    .subscribe((response: Age[]) => {
-      console.log(response, "=age")
-      this.ageName = response
-    })
-  }
 
-  public async geodecode(lat: any, lng: any, id: number, content:string, title: string, age: any, categorie: any) {
+  public async geodecode(lat: any, lng: any, id: number, content: string, title: string, age: any, categorie: any) {
     let url = `https://nominatim.openstreetmap.org/reverse/?format=json&&lat=${lat}&lon=${lng}`;
     let resp = await fetch(url);
     let datas = await resp.json();
@@ -253,13 +186,13 @@ export class ActivityListComponent implements OnInit {
         this.pi = response
         const NavigationExtras: NavigationExtras = {
           state: {
-            id : id,
+            id: id,
             address: this.test,
             content: this.content,
             title: this.title,
             lat: this.lat,
             lng: this.lng,
-            age :this.ageName,
+            age: this.ageName,
             categorie: this.categorieName,
             road: this.road,
             postCode: this.postCode
@@ -268,5 +201,39 @@ export class ActivityListComponent implements OnInit {
         this.router.navigate([`/detail`], NavigationExtras);
       })
   }
-}
 
+  public showCategorie() {
+    this.http.get < Categorie[] > (BASE_URL + `/categories`, {
+        withCredentials: true
+      })
+      .subscribe((response: Categorie[]) => {
+        this.categories = response
+      })
+  }
+  showCategorieName(id: number) {
+    this.http.get < Categorie[] > (BASE_URL + `/categorie/${id}/`, {
+        withCredentials: true
+      })
+      .subscribe((response: Categorie[]) => {
+        console.log(response, "= cat")
+        this.categorieName = response
+      })
+  }
+  public showAge() {
+    this.http.get < Age[] > (BASE_URL + `/ages`, {
+        withCredentials: true
+      })
+      .subscribe((response: Age[]) => {
+        this.ages = response
+      })
+  }
+  showAgeName(id: number) {
+    this.http.get < Age[] > (BASE_URL + `/age/${id}/`, {
+        withCredentials: true
+      })
+      .subscribe((response: Age[]) => {
+        console.log(response, "=age")
+        this.ageName = response
+      })
+  }
+}
