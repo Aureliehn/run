@@ -1,0 +1,46 @@
+  <div class="d-flex justify-content-center ">
+    <div class="d-flex justify-center bg-blue col-11 br-10">
+      <div class="col-6 mx-4 my-5 h-550px br-10" id="map"></div>
+      <div class="col-6 text-center ms-5">
+        <form>
+          <div class=" ">
+            <h1 class="amber mt-2 mb-2">En route pour l'aventure</h1>
+          </div>
+          <div class="form-group ">
+            <label for="" class="amber mt-2 italic">Quelle type d'aventure?</label>
+            <select class="form-control">
+              <option (click)="printListPiService(map)">Toutes les aventures</option>
+              <option *ngFor="let c of categories" (click)="selectResult(c.id, 1)">{{c.name}}</option>
+            </select>
+            <label for="" class="italic amber mt-3 ">Quel âge?</label>
+            <select class="form-control">
+              <option (click)="printListPiService(map)">0 à 80</option>
+              <option value="" *ngFor="let a of ages" (click)="selectResult(categorieSelected, a.id)">{{a.name}}
+              </option>
+            </select>
+            <div class="mb-3 mt-4"> <input type="text" [(ngModel)]="address" name='address' class="input_address"
+                placeholder="Entrez une adressse">
+              <button (click)="geocode(address, map)" class="btn-pink-outline mx-2 mb-5 mt-2">Trouver l'adresse</button>
+            </div>
+
+          </div>
+
+          <div class="mb-5" *ngIf="isVisible">
+            <div class="row card-group ">
+              <div class="col-4 mb-3" *ngFor="let p of pis">
+                <img src="assets/images/father.jpg" class="card-img-top" alt="...">
+                <div class="card ">
+                  <h5 class="title bold">{{p.title}}</h5>
+                  <p class="card-text text-truncate">Description : {{p.content}}</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span class="italic text-muted"> Age :</span> {{p.age_id}}</li>
+                    <li class="list-group-item"><span class="italic text-muted">Catégorie :</span> {{p.categorie_id}}</li>
+                    <li class="list-group-item"><span class="italic text-muted">Latitude :</span> <br>{{p.lat}} ,<br> <span class="italic text-muted">Longitude :  </span><br>{{p.lng}}</li>
+                  </ul>
+                  <button class="btn-pink-outline mb-3" (click)="geodecode(p.lat, p.lng, p.id, p.content, p.title, ageName,categorieName)">Voir</button>
+                  <p *ngIf="ifClickAdress">{{test}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          

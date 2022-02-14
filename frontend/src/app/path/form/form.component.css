@@ -1,0 +1,34 @@
+
+  /* #map {
+    /* margin-top: 5em; */
+    /* border: solid 3px #b96832;
+    border-radius: 5%;
+    height: 50vh;
+    width: 60vh;
+  } */
+
+  /* h1{
+    font-size: 6em;
+    font-weight: bolder;
+    font-family: 'Caveat', cursive;
+    color: #97d2e3;
+} */
+form{
+    display: inline-block;
+}
+.input_address{
+  width: 610px;
+}
+textarea{
+  width: 610px;
+  border-radius: 0.5em;
+  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 1em;
+}
+
+.hidden{
+  display: none;
+}
+.div_select{
+  display: inline-block;
+}
