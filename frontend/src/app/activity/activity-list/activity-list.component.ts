@@ -116,7 +116,6 @@ export class ActivityListComponent implements OnInit {
         // this.showCategorieName(this.categorieSelected)
         // this.showAgeName(this.ageSelected)
       })
-
   }
 
   // Affichage de tous les PI

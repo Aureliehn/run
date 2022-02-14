@@ -22,7 +22,6 @@ def show_pis_service():
     try:
         pis = db.session.query(PointsInterets).all()
         pis = pointssInterets_schema.dump(pis)
-        print(pis)
         db.session.close()
         return jsonify(pis)
     except Exception as e:
@@ -36,7 +35,6 @@ def show_pi_service(id):
     try:
         pi = db.session.query(PointsInterets).filter(PointsInterets.id == id).first()
         pi = pointsInterets_schema.dump(pi)
-        print(pi, "detail")
         db.session.close()
         return jsonify(pi)
     except Exception as e:
@@ -47,20 +45,12 @@ def show_pi_service(id):
 
 def filter_pi_service(filtre, age):
     """Function to filter pi"""
-    # print(filtre, "filtre")
-    # print("typr filtre", type(filtre))
-
-
-    # cat = db.session.query(PointsInterets.categorie).all()
-    # print(cat)
-    # print("type cat", type(cat))
-    # exit()
     try:
-        # pi= db.session.query(PointsInterets).filter(PointsInterets.categorie_id == filtre).all()
+        print("hello")
         pi = db.session.query(PointsInterets).filter((PointsInterets.categorie_id == filtre) and (PointsInterets.age_id == age)).all()
-        # pi = db.session.query(PointsInterets).filter(PointsInterets.age == filtre)
-        # select * from "pI" where categorie = 'nature' AND age ='primaire'
+        print("coucou")
         pi = pointssInterets_schema.dump(pi)
+        # print(pi.content, 'piiiiiii')
         db.session.close()
         return jsonify(pi)
     except Exception as e:
