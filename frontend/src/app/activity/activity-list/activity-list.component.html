@@ -22,9 +22,7 @@
                 placeholder="Entrez une adressse">
               <button (click)="geocode(address, map)" class="btn-pink-outline mx-2 mb-5 mt-2">Trouver l'adresse</button>
             </div>
-
           </div>
-
           <div class="mb-5" *ngIf="isVisible">
             <div class="row card-group ">
               <div class="col-4 mb-3" *ngFor="let p of pis">
@@ -34,13 +32,15 @@
                   <p class="card-text text-truncate">Description : {{p.content}}</p>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"><span class="italic text-muted"> Age :</span> {{p.age_id}}</li>
-                    <li class="list-group-item"><span class="italic text-muted">Catégorie :</span> {{p.categorie_id}}</li>
-                    <li class="list-group-item"><span class="italic text-muted">Latitude :</span> <br>{{p.lat}} ,<br> <span class="italic text-muted">Longitude :  </span><br>{{p.lng}}</li>
+                    <li class="list-group-item"><span class="italic text-muted">Catégorie :</span> {{p.categorie_id}}
+                    </li>
+                    <li class="list-group-item"><span class="italic text-muted">Latitude :</span> <br>{{p.lat}} ,<br>
+                      <span class="italic text-muted">Longitude : </span><br>{{p.lng}}</li>
                   </ul>
-                  <button class="btn-pink-outline mb-3" (click)="geodecode(p.lat, p.lng, p.id, p.content, p.title, ageName,categorieName)">Voir</button>
+                  <button class="btn-pink-outline mb-3"
+                    (click)="geodecode(p.lat, p.lng, p.id, p.content, p.title, ageName,categorieName)">Voir</button>
                   <p *ngIf="ifClickAdress">{{test}}</p>
                 </div>
               </div>
             </div>
           </div>
-          
