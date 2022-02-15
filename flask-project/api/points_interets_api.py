@@ -20,7 +20,6 @@ def show_pis():
 @pi_route.route("/api/filter/pis/<int:filtre>/<int:age>/", methods=["GET"])
 def filter_pi(filtre: integer, age: integer):
     """Function to send pis informations under .json format"""
-    print("hi")
     return filter_pi_service(filtre, age)
 
 @pi_route.route("/api/pi/<int:id>/", methods=["GET"])

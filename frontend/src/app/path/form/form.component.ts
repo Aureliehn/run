@@ -18,7 +18,7 @@ import {
   BASE_URL
 } from '../../global';
 import {
-  PointInteret
+  RUN
 } from 'src/app/interfaces/PI';
 import {
   PIService
@@ -30,9 +30,6 @@ import {
 import 'rxjs/add/operator/map'
 import 'rxjs/Rx';
 import { map } from 'rxjs/operators';
-import { Age } from 'src/app/interfaces/age';
-import { Categorie } from 'src/app/interfaces/categorie';
-
 
 @Component({
   selector: 'app-form',
@@ -42,7 +39,7 @@ import { Categorie } from 'src/app/interfaces/categorie';
 export class FormComponent implements OnInit {
 
   public formAddPI: FormGroup;
-  public pointInteret: PointInteret[] = []
+  public pointInteret: RUN.PointInteret[] = []
   public title: string = ""
   public age_id: number = 0
   public categorie_id: number = 0
@@ -61,8 +58,8 @@ export class FormComponent implements OnInit {
 
   });
   public map: any
-  public ages: Age[] = []
-  public categories: Categorie[] = []
+  public ages: RUN.Age[] = []
+  public categories: RUN.Categorie[] = []
 
   constructor(
     private http: HttpClient,
@@ -106,7 +103,7 @@ export class FormComponent implements OnInit {
   // Affichage de tous les PI
   public printListPiService(map: any) {
     this.piService.printListPi()
-      .subscribe((response: PointInteret[]) => {
+      .subscribe((response: RUN.PointInteret[]) => {
         this.pointInteret = response
         for (const d of response) {
           const marker = L.marker([d.lat, d.lng], {
@@ -173,18 +170,18 @@ export class FormComponent implements OnInit {
   }
 
   public showAge(){
-    this.http.get < Age[] > (BASE_URL + `/ages`, {
+    this.http.get < RUN.Age[] > (BASE_URL + `/ages`, {
       withCredentials: true
     })
-    .subscribe((response: Age[]) => {
+    .subscribe((response: RUN.Age[]) => {
       this.ages = response
     })
   }
   public showCategorie(){
-    this.http.get < Categorie[] > (BASE_URL + `/categories`, {
+    this.http.get < RUN.Categorie[] > (BASE_URL + `/categories`, {
       withCredentials: true
     })
-    .subscribe((response: Categorie[]) => {
+    .subscribe((response: RUN.Categorie[]) => {
       this.categories = response
     })
   }

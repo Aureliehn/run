@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
+import {
+  RUN
+} from 'src/app/interfaces/PI';
 import { Observable, of, BehaviorSubject} from 'rxjs';
 import { catchError, tap, skip} from 'rxjs/operators';
 import { BASE_URL } from '../global';
@@ -26,7 +28,7 @@ export class AuthService {
     .subscribe()
   }
  
-  public seConnecter(utilisateur: User): Observable<boolean>{
+  public seConnecter(utilisateur: RUN.User): Observable<boolean>{
     return this
       .http
       .post<boolean>(BASE_URL+"/user/login", utilisateur, {

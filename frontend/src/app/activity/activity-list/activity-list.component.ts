@@ -7,7 +7,7 @@ import {
   HttpClient
 } from '@angular/common/http';
 import {
-  PointInteret
+  RUN
 } from 'src/app/interfaces/PI';
 import {
   PIService
@@ -15,12 +15,7 @@ import {
 import {
   BASE_URL
 } from 'src/app/global';
-import {
-  Categorie
-} from 'src/app/interfaces/categorie';
-import {
-  Age
-} from 'src/app/interfaces/age';
+
 import {
   Router,
   NavigationExtras
@@ -39,12 +34,12 @@ export class ActivityListComponent implements OnInit {
   public nom: string = ""
   public content: string = ""
   public name: string = ""
-  public pis: PointInteret[] = []
-  public pi: PointInteret[] = []
-  public categories: Categorie[] = []
-  public ages: Age[] = []
-  public ageName: Age[] = []
-  public categorieName: Categorie[] = []
+  public pis: RUN.PointInteret[] = []
+  public pi: RUN.PointInteret[] = []
+  public categories: RUN.Categorie[] = []
+  public ages: RUN.Age[] = []
+  public ageName: RUN.Age[] = []
+  public categorieName: RUN.Categorie[] = []
   public title: string = ""
   public isVisible = false
   public ifClickAdress = false
@@ -99,10 +94,10 @@ export class ActivityListComponent implements OnInit {
 
   // FUNCTION TO FILTER BY SOMETHING 
   public filterBy(filtre: number, map: any, age: number) {
-    this.http.get < PointInteret[] > (BASE_URL + `/filter/pis/${filtre}/${age}/`, {
+    this.http.get < RUN.PointInteret[] > (BASE_URL + `/filter/pis/${filtre}/${age}/`, {
         withCredentials: true
       })
-      .subscribe((response: PointInteret[]) => {
+      .subscribe((response: RUN.PointInteret[]) => {
         console.log(response, "reponse")
         this.pis = response
         this.isVisible = true
@@ -116,13 +111,12 @@ export class ActivityListComponent implements OnInit {
         // this.showCategorieName(this.categorieSelected)
         // this.showAgeName(this.ageSelected)
       })
-
   }
 
   // Affichage de tous les PI
   public printListPiService(map: any) {
     this.piService.printListPi()
-      .subscribe((response: PointInteret[]) => {
+      .subscribe((response: RUN.PointInteret[]) => {
         this.pis = response
         for (const d of response) {
           const marker = L.marker([d.lat, d.lng], {
@@ -179,10 +173,10 @@ export class ActivityListComponent implements OnInit {
   }
 
   piSelected(id: number) {
-    this.http.get < PointInteret[] > (BASE_URL + `/pi/${id}`, {
+    this.http.get < RUN.PointInteret[] > (BASE_URL + `/pi/${id}`, {
         withCredentials: true
       })
-      .subscribe((response: PointInteret[]) => {
+      .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
         const NavigationExtras: NavigationExtras = {
           state: {
@@ -203,35 +197,35 @@ export class ActivityListComponent implements OnInit {
   }
 
   public showCategorie() {
-    this.http.get < Categorie[] > (BASE_URL + `/categories`, {
+    this.http.get < RUN.Categorie[] > (BASE_URL + `/categories`, {
         withCredentials: true
       })
-      .subscribe((response: Categorie[]) => {
+      .subscribe((response: RUN.Categorie[]) => {
         this.categories = response
       })
   }
   showCategorieName(id: number) {
-    this.http.get < Categorie[] > (BASE_URL + `/categorie/${id}/`, {
+    this.http.get < RUN.Categorie[] > (BASE_URL + `/categorie/${id}/`, {
         withCredentials: true
       })
-      .subscribe((response: Categorie[]) => {
+      .subscribe((response: RUN.Categorie[]) => {
         console.log(response, "= cat")
         this.categorieName = response
       })
   }
   public showAge() {
-    this.http.get < Age[] > (BASE_URL + `/ages`, {
+    this.http.get < RUN.Age[] > (BASE_URL + `/ages`, {
         withCredentials: true
       })
-      .subscribe((response: Age[]) => {
+      .subscribe((response: RUN.Age[]) => {
         this.ages = response
       })
   }
   showAgeName(id: number) {
-    this.http.get < Age[] > (BASE_URL + `/age/${id}/`, {
+    this.http.get < RUN.Age[] > (BASE_URL + `/age/${id}/`, {
         withCredentials: true
       })
-      .subscribe((response: Age[]) => {
+      .subscribe((response: RUN.Age[]) => {
         console.log(response, "=age")
         this.ageName = response
       })
