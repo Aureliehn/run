@@ -20,7 +20,48 @@ import {
   Router,
   NavigationExtras
 } from '@angular/router';
+// ANCHOR
+type CatDesc = {
+  name: string,
+  label: string,
+  iconBackgroundColor: string,
 
+  img: string,
+}
+const catTypes: CatDesc[] = [{
+    name: 'Châteaux',
+    label: "Châteaux",
+    iconBackgroundColor: "#183A6A",
+    img: "assets/images/chateau.jpg"
+  },
+  {
+    name: 'Musées',
+    label: "Musées",
+    iconBackgroundColor: "#183A6A",
+    img: "assets/images/father.jpg"
+  },
+  {
+    name: 'Nature',
+    label: "Nature",
+    iconBackgroundColor: "#183A6A",
+    img: "assets/images/father.jpg"
+  },
+  {
+    name: 'Méditahèques',
+    label: "Méditahèques",
+    iconBackgroundColor: "#183A6A",
+    img: "assets/images/father.jpg"
+  },
+  {
+    name: 'Jardins',
+    label: "Jardins",
+    iconBackgroundColor: "#183A6A",
+    img: "assets/images/father.jpg"
+  },
+]
+
+
+// ANCHOR
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
@@ -56,13 +97,18 @@ export class ActivityListComponent implements OnInit {
   public test: any
   public road: any
   public postCode: any
+  public catTypes: CatDesc[] = catTypes
 
+
+  public catType: CatDesc;
 
   constructor(
     private http: HttpClient,
     private piService: PIService,
     private router: Router
-  ) {}
+  ) {
+    this.catType = this.catTypes[0]
+  }
 
 
   ngOnInit(): void {
@@ -169,7 +215,7 @@ export class ActivityListComponent implements OnInit {
         this.pi = response
         this.showCategorieName(id)
         const NavigationExtras: NavigationExtras = {
-          
+
           state: {
             id: id,
             address: this.test,
