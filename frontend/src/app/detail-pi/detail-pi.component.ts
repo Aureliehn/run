@@ -4,7 +4,7 @@ import {
   HttpClient
 } from '@angular/common/http';
 import {
-  PointInteret
+  RUN
 } from 'src/app/interfaces/PI';
 import {
   PIService
@@ -12,12 +12,7 @@ import {
 import {
   BASE_URL
 } from 'src/app/global';
-import {
-  Categorie
-} from 'src/app/interfaces/categorie';
-import {
-  Age
-} from 'src/app/interfaces/age';
+
 import { Router,NavigationExtras } from '@angular/router';
 
 @Component({
@@ -27,11 +22,11 @@ import { Router,NavigationExtras } from '@angular/router';
 })
 export class DetailPiComponent implements OnInit {
 
-  @Output() public pi : PointInteret[]= []
+  @Output() public pi : RUN.PointInteret[]= []
   // @Output() public address : string=""
-  public pis: PointInteret[] = []
-  public categories: Categorie[] = []
-  public ages: Age[] = []
+  public pis: RUN.PointInteret[] = []
+  public categories: RUN.Categorie[] = []
+  public ages: RUN.Age[] = []
   public map: any
   public address : string = ""
   public road : string = ""
@@ -93,10 +88,10 @@ export class DetailPiComponent implements OnInit {
   }
 
   piSelected(id: number) {
-    this.http.get < PointInteret[] > (BASE_URL + `/pi/${id}`, {
+    this.http.get < RUN.PointInteret[] > (BASE_URL + `/pi/${id}`, {
         withCredentials: true
       })
-      .subscribe((response: PointInteret[]) => {
+      .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
         console.log(this.pi, "response piSelected222222")
         for(let i in this.pi){
