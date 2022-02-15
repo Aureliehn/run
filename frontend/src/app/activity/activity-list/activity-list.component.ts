@@ -98,18 +98,8 @@ export class ActivityListComponent implements OnInit {
         withCredentials: true
       })
       .subscribe((response: RUN.PointInteret[]) => {
-        console.log(response, "reponse")
         this.pis = response
         this.isVisible = true
-        // console.log(this.pis.age.name)
-        // console.log(this.pis.age[0])
-        // let age = this.pis.map(a => a.age_id)
-        // console.log(age, 'age')
-        // for (var i = 0; i < age.length; i++) {
-        //   console.log(age[i], 'age[i');
-        // }
-        // this.showCategorieName(this.categorieSelected)
-        // this.showAgeName(this.ageSelected)
       })
   }
 
@@ -158,7 +148,6 @@ export class ActivityListComponent implements OnInit {
     let url = `https://nominatim.openstreetmap.org/reverse/?format=json&&lat=${lat}&lon=${lng}`;
     let resp = await fetch(url);
     let datas = await resp.json();
-    console.log(datas.address, "datas géodecode")
     this.test = datas.address.municipality
     this.ifClickAdress = true
     this.piSelected(id)
@@ -178,7 +167,9 @@ export class ActivityListComponent implements OnInit {
       })
       .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
+        this.showCategorieName(id)
         const NavigationExtras: NavigationExtras = {
+          
           state: {
             id: id,
             address: this.test,
@@ -186,7 +177,7 @@ export class ActivityListComponent implements OnInit {
             title: this.title,
             lat: this.lat,
             lng: this.lng,
-            age: this.ageName,
+            age: this.ages,
             categorie: this.categorieName,
             road: this.road,
             postCode: this.postCode
@@ -209,7 +200,6 @@ export class ActivityListComponent implements OnInit {
         withCredentials: true
       })
       .subscribe((response: RUN.Categorie[]) => {
-        console.log(response, "= cat")
         this.categorieName = response
       })
   }
@@ -219,6 +209,7 @@ export class ActivityListComponent implements OnInit {
       })
       .subscribe((response: RUN.Age[]) => {
         this.ages = response
+
       })
   }
   showAgeName(id: number) {
@@ -226,7 +217,6 @@ export class ActivityListComponent implements OnInit {
         withCredentials: true
       })
       .subscribe((response: RUN.Age[]) => {
-        console.log(response, "=age")
         this.ageName = response
       })
   }

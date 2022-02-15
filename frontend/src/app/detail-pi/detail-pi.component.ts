@@ -1,19 +1,9 @@
 import { Component, OnInit, Output,Input } from '@angular/core';
 import * as L from 'leaflet';
 import {
-  HttpClient
-} from '@angular/common/http';
-import {
   RUN
 } from 'src/app/interfaces/PI';
-import {
-  PIService
-} from 'src/app/services/p-i.service';
-import {
-  BASE_URL
-} from 'src/app/global';
-
-import { Router,NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-pi',
@@ -23,8 +13,8 @@ import { Router,NavigationExtras } from '@angular/router';
 export class DetailPiComponent implements OnInit {
 
   @Output() public pi : RUN.PointInteret[]= []
-  // @Output() public address : string=""
-  public pis: RUN.PointInteret[] = []
+
+
   public categories: RUN.Categorie[] = []
   public ages: RUN.Age[] = []
   public map: any
@@ -39,8 +29,6 @@ export class DetailPiComponent implements OnInit {
 
 
   constructor(
-    private http: HttpClient,
-    private piService: PIService,
     private router:Router
   ) {
     const navigation: any = this.router.getCurrentNavigation();
@@ -72,13 +60,11 @@ export class DetailPiComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.piSelected(this.id)
-    console.log(this.pi, 'sur page detail')
     const centre = {
       lat: this.lat,
       lng: this.lng
     };
-    // affichage de la map
+
     this.map = L.map('map').setView(centre, 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -87,19 +73,6 @@ export class DetailPiComponent implements OnInit {
           marker.bindPopup("L'activité se trouve ici").openPopup();
   }
 
-  piSelected(id: number) {
-    this.http.get < RUN.PointInteret[] > (BASE_URL + `/pi/${id}`, {
-        withCredentials: true
-      })
-      .subscribe((response: RUN.PointInteret[]) => {
-        this.pi = response
-        console.log(this.pi, "response piSelected222222")
-        for(let i in this.pi){
-          console.log(this.pi[i], "grrrrr");
-        } 
-        console.log(this.pi[1], "this.pi[1]")
-      })
-  }
   navigateList(){
     this.router.navigateByUrl("/activity")
   }
