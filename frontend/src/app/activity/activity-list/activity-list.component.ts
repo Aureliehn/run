@@ -24,40 +24,48 @@ import {
 type CatDesc = {
   name: string,
   label: string,
-  iconBackgroundColor: string,
-
-  img: string,
 }
 const catTypes: CatDesc[] = [{
     name: 'Châteaux',
     label: "Châteaux",
-    iconBackgroundColor: "#183A6A",
-    img: "assets/images/chateau.jpg"
   },
   {
     name: 'Musées',
     label: "Musées",
-    iconBackgroundColor: "#183A6A",
-    img: "assets/images/father.jpg"
   },
   {
     name: 'Nature',
     label: "Nature",
-    iconBackgroundColor: "#183A6A",
-    img: "assets/images/father.jpg"
   },
   {
     name: 'Méditahèques',
-    label: "Méditahèques",
-    iconBackgroundColor: "#183A6A",
-    img: "assets/images/father.jpg"
+    label: "Méditahèques", 
   },
   {
     name: 'Jardins',
     label: "Jardins",
-    iconBackgroundColor: "#183A6A",
-    img: "assets/images/father.jpg"
   },
+]
+type AgeDesc = {
+  name: string,
+  label: string,
+  ageBackground: string
+}
+const ageTypes: AgeDesc[] = [{
+    name: 'Maternelle',
+    label: "Maternelle",
+    ageBackground:"#ffc44e"
+  },
+  {
+    name: 'Primaire',
+    label: "Primaire",
+    ageBackground:"#90ee90"
+  },
+  {
+    name: 'College',
+    label: "College",
+    ageBackground:"#ea5a63"
+  }
 ]
 
 
@@ -98,9 +106,11 @@ export class ActivityListComponent implements OnInit {
   public road: any
   public postCode: any
   public catTypes: CatDesc[] = catTypes
+  public ageTypes: AgeDesc[] = ageTypes
 
 
   public catType: CatDesc;
+  public ageType: AgeDesc;
 
   constructor(
     private http: HttpClient,
@@ -108,6 +118,7 @@ export class ActivityListComponent implements OnInit {
     private router: Router
   ) {
     this.catType = this.catTypes[0]
+    this.ageType = this.ageTypes[0]
   }
 
 
