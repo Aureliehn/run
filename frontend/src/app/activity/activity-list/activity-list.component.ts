@@ -39,35 +39,13 @@ const catTypes: CatDesc[] = [{
   },
   {
     name: 'Méditahèques',
-    label: "Méditahèques", 
+    label: "Méditahèques",
   },
   {
     name: 'Jardins',
     label: "Jardins",
   },
 ]
-type AgeDesc = {
-  name: string,
-  label: string,
-  ageBackground: string
-}
-const ageTypes: AgeDesc[] = [{
-    name: 'Maternelle',
-    label: "Maternelle",
-    ageBackground:"#ffc44e"
-  },
-  {
-    name: 'Primaire',
-    label: "Primaire",
-    ageBackground:"#90ee90"
-  },
-  {
-    name: 'College',
-    label: "College",
-    ageBackground:"#ea5a63"
-  }
-]
-
 
 // ANCHOR
 @Component({
@@ -92,12 +70,11 @@ export class ActivityListComponent implements OnInit {
   public title: string = ""
   public isVisible = false
   public ifClickAdress = false
-  public icoNew = L.icon({
-    iconUrl: 'assets/images/pin.png',
+  public markerRed = L.icon({
+    iconUrl: 'assets/images/markerRed.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41]
-
   });
   public map: any
   public mapCard: any
@@ -106,11 +83,9 @@ export class ActivityListComponent implements OnInit {
   public road: any
   public postCode: any
   public catTypes: CatDesc[] = catTypes
-  public ageTypes: AgeDesc[] = ageTypes
-
 
   public catType: CatDesc;
-  public ageType: AgeDesc;
+ 
 
   constructor(
     private http: HttpClient,
@@ -118,7 +93,6 @@ export class ActivityListComponent implements OnInit {
     private router: Router
   ) {
     this.catType = this.catTypes[0]
-    this.ageType = this.ageTypes[0]
   }
 
 
@@ -167,7 +141,7 @@ export class ActivityListComponent implements OnInit {
         this.pis = response
         for (const d of response) {
           const marker = L.marker([d.lat, d.lng], {
-            icon: this.icoNew
+            icon: this.markerRed
           }).addTo(map);
           marker.bindPopup(d.title);
         }
@@ -266,9 +240,9 @@ export class ActivityListComponent implements OnInit {
       })
       .subscribe((response: RUN.Age[]) => {
         this.ages = response
-
       })
   }
+
   showAgeName(id: number) {
     this.http.get < RUN.Age[] > (BASE_URL + `/age/${id}/`, {
         withCredentials: true
