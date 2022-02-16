@@ -26,8 +26,14 @@
           <div class="mb-5" *ngIf="isVisible">
             <div class="row card-group ">
               <div class="col-4 mb-3" *ngFor="let p of pis">
-                <img src="assets/images/father.jpg" class="card-img-top" alt="...">
-                <div class="card ">
+            
+                <img *ngIf="p.categorie.name === 'Nature'" src="assets/images/nature.jpg" class="card-img-top" alt="...">
+                <img *ngIf="p.categorie.name === 'Châteaux'" src="assets/images/chateau.jpg" class="card-img-top" alt="...">
+                <img *ngIf="p.categorie.name === 'Musées'" src="assets/images/musee.jpg" class="card-img-top" alt="...">
+                <img *ngIf="p.categorie.name === 'Méditahèques'" src="assets/images/biblio.jpg" class="card-img-top" alt="...">
+                <img *ngIf="p.categorie.name === 'Jardins'" src="assets/images/jardin.jpg" class="card-img-top" alt="...">
+
+                <div class="card">
                   <h5 class="title bold">{{p.title}}</h5>
                   <p class="card-text text-truncate">Description : {{p.content}}</p>
                   <ul class="list-group list-group-flush">
