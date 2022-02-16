@@ -20,6 +20,7 @@ import {
   Router,
   NavigationExtras
 } from '@angular/router';
+
 // ANCHOR
 type CatDesc = {
   name: string,
@@ -83,9 +84,7 @@ export class ActivityListComponent implements OnInit {
   public road: any
   public postCode: any
   public catTypes: CatDesc[] = catTypes
-
   public catType: CatDesc;
- 
 
   constructor(
     private http: HttpClient,
@@ -99,7 +98,6 @@ export class ActivityListComponent implements OnInit {
   ngOnInit(): void {
     this.showAge()
     this.showCategorie()
-
 
     const centre = {
       lat: 46.77668,
@@ -198,7 +196,6 @@ export class ActivityListComponent implements OnInit {
       })
       .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
-        this.showCategorieName(id)
         const NavigationExtras: NavigationExtras = {
 
           state: {
@@ -208,7 +205,7 @@ export class ActivityListComponent implements OnInit {
             title: this.title,
             lat: this.lat,
             lng: this.lng,
-            age: this.ages,
+            age: this.ageName,
             categorie: this.categorieName,
             road: this.road,
             postCode: this.postCode
