@@ -50,12 +50,11 @@ export class FormComponent implements OnInit {
   public mapLocalisation: boolean = false
   public localisationIsVisible: boolean = true
   public address: string = ""
-  public icoNew = L.icon({
-    iconUrl: 'assets/images/pin.png',
+  public markerGreen = L.icon({
+    iconUrl: 'assets/images/markerGreen.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41]
-
   });
   public map: any
   public ages: RUN.Age[] = []
@@ -107,14 +106,11 @@ export class FormComponent implements OnInit {
         this.pointInteret = response
         for (const d of response) {
           const marker = L.marker([d.lat, d.lng], {
-            icon: this.icoNew
+            icon: this.markerGreen
           }).addTo(map);
         }
       })
   }
-
-  // récupérer les emplacements
-
   //  Géolocalisation ANCHOR
   clickLocalisation() {
     this.mapLocalisation = true
