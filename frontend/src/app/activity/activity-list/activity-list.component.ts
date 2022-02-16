@@ -20,6 +20,7 @@ import {
   Router,
   NavigationExtras
 } from '@angular/router';
+
 // ANCHOR
 type CatDesc = {
   name: string,
@@ -100,7 +101,6 @@ export class ActivityListComponent implements OnInit {
     this.showAge()
     this.showCategorie()
 
-
     const centre = {
       lat: 46.77668,
       lng: 3.07722
@@ -176,6 +176,7 @@ export class ActivityListComponent implements OnInit {
 
 
   public async geodecode(lat: any, lng: any, id: number, content: string, title: string, age: any, categorie: any) {
+    console.log(categorie, "ds geodecode")
     let url = `https://nominatim.openstreetmap.org/reverse/?format=json&&lat=${lat}&lon=${lng}`;
     let resp = await fetch(url);
     let datas = await resp.json();
@@ -193,12 +194,14 @@ export class ActivityListComponent implements OnInit {
   }
 
   piSelected(id: number) {
+    // console.log()
     this.http.get < RUN.PointInteret[] > (BASE_URL + `/pi/${id}`, {
         withCredentials: true
       })
       .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
-        this.showCategorieName(id)
+        // this.showCategorieName(id)
+        console.log(this.categorieName, 'categorie envoyéé')
         const NavigationExtras: NavigationExtras = {
 
           state: {
