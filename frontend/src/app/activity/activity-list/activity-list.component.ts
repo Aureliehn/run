@@ -211,7 +211,7 @@ export class ActivityListComponent implements OnInit {
             title: this.title,
             lat: this.lat,
             lng: this.lng,
-            age: this.ages,
+            age: this.ageName,
             categorie: this.categorieName,
             road: this.road,
             postCode: this.postCode
