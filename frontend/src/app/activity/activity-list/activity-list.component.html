@@ -40,12 +40,13 @@
                     <li class="list-group-item"><span class="italic text-muted"> Age :</span> {{p.age.name}}</li>
                     <li class="list-group-item"><span class="italic text-muted">Catégorie :</span> {{p.categorie.name}}
                     </li>
-                    <li class="list-group-item"><span class="italic text-muted">Latitude :</span> <br>{{p.lat}} ,<br>
+                    <li *ngIf="!cityIsVisible" class="list-group-item"><span class="italic text-muted">Latitude :</span> <br>{{p.lat}} ,<br>
                       <span class="italic text-muted">Longitude : </span><br>{{p.lng}}</li>
+                      <li *ngIf="cityIsVisible">{{test}}</li>
                   </ul>
+                  <button (click)="searchCity(p.lat, p.lng)">Ville</button>
                   <button class="btn-pink-outline mb-3"
                     (click)="geodecode(p.lat, p.lng, p.id, p.content, p.title, p.age.name, p.categorie.name)">Voir</button>
-                  <p *ngIf="ifClickAdress">{{test}}</p>
                 </div>
               </div>
             </div>
