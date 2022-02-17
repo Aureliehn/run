@@ -129,6 +129,10 @@ export class ActivityListComponent implements OnInit {
       .subscribe((response: RUN.PointInteret[]) => {
         this.pis = response
         this.isVisible = true
+        // ANCHOR
+        for(const p of this.pis){
+          this.searchCity(p.lat, p.lng)
+        }
       })
   }
 
@@ -193,7 +197,7 @@ export class ActivityListComponent implements OnInit {
     console.log(datas, 'datas')
     this.road = datas.address.road
     this.test = datas.address.municipality
-    this.cityIsVisible = true
+    // this.cityIsVisible = true
   }
 
   piSelected(id: number) {
