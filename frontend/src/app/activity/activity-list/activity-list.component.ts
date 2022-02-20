@@ -85,7 +85,7 @@ export class ActivityListComponent implements OnInit {
   public postCode: any
   public catTypes: CatDesc[] = catTypes
   public catType: CatDesc;
-
+  public cityIsVisible: boolean = false
   constructor(
     private http: HttpClient,
     private piService: PIService,
@@ -129,6 +129,10 @@ export class ActivityListComponent implements OnInit {
       .subscribe((response: RUN.PointInteret[]) => {
         this.pis = response
         this.isVisible = true
+        // ANCHOR
+        for(const p of this.pis){
+          this.searchCity(p.lat, p.lng)
+        }
       })
   }
 
@@ -166,19 +170,16 @@ export class ActivityListComponent implements OnInit {
     map.setView([this.lat, this.lng], 8);
   }
 
-
   public selectResult(filtre: number, age: number) {
     this.categorieSelected = filtre
     this.filterBy(filtre, this.map, age)
   }
-
 
   public async geodecode(lat: any, lng: any, id: number, content: string, title: string, age: any, categorie: any) {
     let url = `https://nominatim.openstreetmap.org/reverse/?format=json&&lat=${lat}&lon=${lng}`;
     let resp = await fetch(url);
     let datas = await resp.json();
     this.test = datas.address.municipality
-    this.ifClickAdress = true
     this.piSelected(id)
     this.content = content
     this.title = title
@@ -189,6 +190,15 @@ export class ActivityListComponent implements OnInit {
     this.road = datas.address.road
     this.postCode = datas.address.postcode
   }
+  public async searchCity(lat: any, lng: any){
+    let url = `https://nominatim.openstreetmap.org/reverse/?format=json&&lat=${lat}&lon=${lng}`;
+    let resp = await fetch(url);
+    let datas = await resp.json();
+    console.log(datas, 'datas')
+    this.road = datas.address.road
+    this.test = datas.address.municipality
+    // this.cityIsVisible = true
+  }
 
   piSelected(id: number) {
     this.http.get < RUN.PointInteret[] > (BASE_URL + `/pi/${id}`, {
@@ -197,7 +207,6 @@ export class ActivityListComponent implements OnInit {
       .subscribe((response: RUN.PointInteret[]) => {
         this.pi = response
         const NavigationExtras: NavigationExtras = {
-
           state: {
             id: id,
             address: this.test,
