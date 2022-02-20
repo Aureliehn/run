@@ -1,18 +1,18 @@
   <div class="d-flex justify-content-center ">
     <div class="d-flex justify-center bg-blue col-11 br-10">
       <div class="col-6 mx-4 my-5 h-550px br-10" id="map"></div>
-      <div class="col-6 text-center ms-5">
+      <div class="col-6 text-center ms-5 d-flex justify-content-center align-items-center">
         <form>
           <div class=" ">
-            <h1 class="amber mt-2 mb-2">En route pour l'aventure</h1>
+            <h1 class="amber mt-2 mb-2 d-flex justify-content-center">En route pour l'aventure</h1>
           </div>
           <div class="form-group ">
-            <label for="" class="amber mt-2 italic">Quelle type d'aventure?</label>
+            <!-- <label for="" class="amber mt-2 italic">Quelle type d'aventure?</label> -->
             <select class="form-control">
               <option (click)="printListPiService(map)">Toutes les aventures</option>
               <option *ngFor="let c of categories" (click)="selectResult(c.id, 1)">{{c.name}}</option>
             </select>
-            <label for="" class="italic amber mt-3 ">Quel âge?</label>
+            <!-- <label for="" class="italic amber mt-3 ">Quel âge?</label> -->
             <select class="form-control">
               <option (click)="printListPiService(map)">0 à 80</option>
               <option value="" *ngFor="let a of ages" (click)="selectResult(categorieSelected, a.id)">{{a.name}}
