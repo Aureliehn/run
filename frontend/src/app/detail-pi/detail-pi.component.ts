@@ -40,12 +40,18 @@ export class DetailPiComponent implements OnInit {
   public id: number = 0
   public lat: number = 0
   public lng: number = 0
+  public markerGreen = L.icon({
+    iconUrl: 'assets/images/markerGreen.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [0, -41]
+  })
   public markerRed = L.icon({
     iconUrl: 'assets/images/markerRed.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41]
-  });
+  })
 
   constructor(
     private http: HttpClient,
@@ -89,10 +95,18 @@ export class DetailPiComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
+
+    L.circle([this.lat, this.lng], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 20000
+    }).addTo(this.map);
     const marker = L.marker([this.lat, this.lng], {
       icon: this.markerRed
     }).addTo(this.map);
     marker.bindPopup("L'activité se trouve ici").openPopup();
+    this.showAllPic()
   }
 
   navigateList() {
@@ -114,5 +128,20 @@ export class DetailPiComponent implements OnInit {
         this.pic = response
       })
   }
-
+  public showAllPic() {
+    return this.http.get < RUN.PIC[] > (BASE_URL + '/pic/', {
+      withCredentials: true})
+      .subscribe((response: RUN.PIC[]) => {
+        console.log(response, 'reponse')
+        this.pic = response
+        for (const d of response) {
+          const marker = L.marker([d.lat, d.lng], {
+            icon: this.markerGreen
+          }).addTo(this.map);
+          marker.bindPopup(("<b>"+d.name+"</b><br/>"+d.categorie+"</b><br/>")) 
+        }
+      }
+        )
+      
+    }
 }

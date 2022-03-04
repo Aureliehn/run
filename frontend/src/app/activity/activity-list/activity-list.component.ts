@@ -55,6 +55,9 @@ const catTypes: CatDesc[] = [{
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
+
+  public pic: RUN.PIC[]= []
+  public activitySearch: string = ''
   public lat: number = 0
   public lng: number = 0
   public categorieSelected: number = 0
@@ -76,7 +79,13 @@ export class ActivityListComponent implements OnInit {
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41]
-  });
+  })
+  public markerGreen = L.icon({
+    iconUrl: 'assets/images/markerGreen.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [0, -41]
+  })
   public map: any
   public mapCard: any
   public address: string = ""
@@ -115,6 +124,7 @@ export class ActivityListComponent implements OnInit {
       this.setLatLng(e.latlng.lat, e.latlng.lng)
     })
     this.printListPiService(this.map)
+    this.showAllPic()
   }
   private setLatLng(lat: number, lng: number) {
     this.lat = lat;
@@ -145,7 +155,8 @@ export class ActivityListComponent implements OnInit {
           const marker = L.marker([d.lat, d.lng], {
             icon: this.markerRed
           }).addTo(map);
-          marker.bindPopup(d.title);
+          marker.bindPopup(("<b>"+d.title+"</b><br/>"+d.age.name+"</b><br/>"+ d.categorie.name+"</b></b><br /></b><br />")) 
+          // marker.bindPopup(("<b>"+d.title+"</b><br/>"+d.age.name+"</b><br/>"+ d.categorie.name+"</b></b><br /></b><br /><a href=\"https://www.s.gouv.fr/dvd/e.pdf\" target=\"_blank\">Voir</a>"))
         }
       })
   }
@@ -257,4 +268,20 @@ export class ActivityListComponent implements OnInit {
         this.ageName = response
       })
   }
+  public showAllPic() {
+    return this.http.get < RUN.PIC[] > (BASE_URL + '/pic/', {
+      withCredentials: true})
+      .subscribe((response: RUN.PIC[]) => {
+        console.log(response, 'reponse')
+        this.pic = response
+        for (const d of response) {
+          const marker = L.marker([d.lat, d.lng], {
+            icon: this.markerGreen
+          }).addTo(this.map);
+          marker.bindPopup(("<b>"+d.name+"</b><br/>"+d.categorie+"</b><br/>")) 
+        }
+      }
+        )
+      
+    }
 }
