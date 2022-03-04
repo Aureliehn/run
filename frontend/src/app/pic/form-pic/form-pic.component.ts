@@ -99,4 +99,5 @@ export class FormPicComponent implements OnInit {
       console.log("bop", this.name, this.lat, this.lng, this.address, this.categorie)
     }
   }
+ 
 }

@@ -16,3 +16,10 @@
   .title{
     color:#ea5a63
   }
+img{
+  max-width: 190px;
+  max-height: 132px;
+}
+.card{
+  max-width: 290px;
+}

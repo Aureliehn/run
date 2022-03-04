@@ -49,7 +49,7 @@
     <div class="col-3"*ngIf="hotelIsVisible">
 
 
-        <table class="table table-hover">
+        <table class="table table-hover" id="table">
             <thead>
               <tr>
                 <th scope="col">Nom</th>
@@ -95,7 +95,14 @@
     <button (click)="selectResult('restaurant')" class="mr-2 btn btn-secondary">Voir tous les resto</button>      
     <button (click)="selectResult('bar')" class="mr-2 btn btn-secondary">Voir tous les bars</button>
     <button (click)="selectResult('hotel')" class="mr-2 btn btn-secondary">Voir tous les hôtels</button>
+    <button (click)="generatePdf()" class="mr-2 btn btn-secondary">Download PDF</button>
     <button [routerLink]="['/pic']" class="mr-2 btn btn-secondary">ajouter un PIC</button>
+    
+
+      
+
+ 
+
 </div>
 
 </div>

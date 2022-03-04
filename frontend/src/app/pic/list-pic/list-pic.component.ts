@@ -1,15 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { RUN } from '../../interfaces/PI';
 import { BASE_URL } from '../../global';
+import { jsPDF } from 'jspdf'
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-list-pic',
   templateUrl: './list-pic.component.html',
-  styleUrls: ['./list-pic.component.css']
+  styleUrls: ['./list-pic.component.css'],
+  providers: [
+    { provide: 'Window',  useValue: window }
+  ]
 })
+
+
 export class ListPicComponent implements OnInit {
 
+  
   public pic: RUN.PIC[]= []
   public name : string = ''
   public categorie : string = ''
@@ -20,13 +28,20 @@ export class ListPicComponent implements OnInit {
   public hotelIsVisible : boolean = false
   public barIsVisible : boolean = false
   public allIsVisible : boolean = true
+  public header = [['id','nom','categorie','lat','lng']]
+  public tableData : any[] =[]
+
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    @Inject('Window') private window: Window
+  ) { 
+  
+  }
 
   ngOnInit(): void {
    this.showAllPic()
+
   }
 
   public showAllPic() {
@@ -39,6 +54,18 @@ export class ListPicComponent implements OnInit {
         this.restaurantIsVisible =false
         this.barIsVisible =false
         this.hotelIsVisible =false
+        // ANCHOR 
+
+          for (const d of this.pic) {
+            this.tableData= [[
+              d.id,
+              d.name,
+              d.categorie,
+              d.lat,
+              d.lng
+            ]]
+
+        }
       }
         )
       
@@ -59,5 +86,24 @@ export class ListPicComponent implements OnInit {
           this.pic = response
         })
     }
+    public doc = new jsPDF();
+    generatePdf() {
+      var pdf = new jsPDF();
+
+      pdf.setFontSize(10);
+      pdf.text('Liste PIC', 11, 8);
+      pdf.setFontSize(12);
+      pdf.setTextColor(99);
+
+
+      (pdf as any).autoTable({
+      head: this.header,
+      body: this.tableData,
+      theme: 'grid',
+      fillColor: '#b2dfdb'
+      })
+      pdf.output('dataurlnewwindow')
+      pdf.save('table.pdf');
+  }  
   }
 

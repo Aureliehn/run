@@ -13,6 +13,7 @@ import {
 } from '@angular/router';
 import { BASE_URL } from '../global';
 import { HttpClient } from '@angular/common/http';
+import { jsPDF } from 'jspdf'
 
 @Component({
   selector: 'app-detail-pi',
@@ -23,6 +24,8 @@ export class DetailPiComponent implements OnInit {
 
   @Output() public pi: RUN.PointInteret[] = []
 
+  header = [['Titre', 'Categorie', 'Age']]
+  tableData : any[] =[]
   public pic: RUN.PIC[]= []
   public categorieSelected: string=''
   public hotelIsVisible : boolean = false
@@ -53,6 +56,8 @@ export class DetailPiComponent implements OnInit {
     popupAnchor: [0, -41]
   })
 
+
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -82,6 +87,8 @@ export class DetailPiComponent implements OnInit {
     this.categories = state.categorie
     this.road = state.road
     this.postCode = state.postCode
+    this.header = [['Titre', 'Categorie', 'Age', 'Description', 'Code postal','Ville']]
+    this.tableData = [[this.title, this.categories, this.ages, this.content, this.postCode, this.road]]
   }
 
   ngOnInit(): void {
@@ -144,4 +151,22 @@ export class DetailPiComponent implements OnInit {
         )
       
     }
+    generatePdf() {
+      var pdf = new jsPDF();
+
+      pdf.setFontSize(10);
+      pdf.text('Activité', 11, 8);
+      pdf.setFontSize(12);
+      pdf.setTextColor(99);
+
+
+      (pdf as any).autoTable({
+      head: this.header,
+      body: this.tableData,
+      theme: 'striped',
+      fillColor: '#f8bbd0'
+      })
+      pdf.output('dataurlnewwindow')
+      pdf.save('table.pdf');
+  }  
 }
