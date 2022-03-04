@@ -87,7 +87,7 @@ export class FormPicComponent implements OnInit {
         withCredentials: true,
       })
       .subscribe({
-        next: () => this.router.navigateByUrl("/"),
+        next: () => this.router.navigateByUrl("listPic"),
         error: (e) => console.log(e)
       })
   }

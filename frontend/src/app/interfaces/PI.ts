@@ -26,5 +26,13 @@ export namespace RUN {
       categorie: Categorie
     
   }
+  export interface PIC {
+      id: number
+      name: string
+      categorie: string
+      lat: number
+      lng: number
+    
+  }
 }
 

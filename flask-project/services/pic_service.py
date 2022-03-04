@@ -16,3 +16,16 @@ def add_pic_service(pic_data):
         import traceback
         traceback.print_exc()
         return make_response({'message': str(e)}, 404)
+
+def show_pic_service():
+    """Function to show all pic"""
+    try:
+        pic = db.session.query(PIC).all()
+        pic = pics_schema.dump(pic)
+        db.session.close()
+        return jsonify(pic)
+    except Exception as e:
+        print(str(e))
+        import traceback
+        traceback.print_exc()
+        return make_response({"message": str(e)}, 404)
