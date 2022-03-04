@@ -6,6 +6,9 @@ import { DetailPiComponent } from './detail-pi/detail-pi.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FormComponent } from './path/form/form.component';
+import { ListComponent } from './path/list/list.component';
+import { FormPicComponent } from './pic/form-pic/form-pic.component';
+import { ListPicComponent } from './pic/list-pic/list-pic.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuardService } from './services/authGuardService';
 
@@ -19,6 +22,9 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'auth', component: AuthComponent},
   { path: 'logout', component: LogoutComponent},
+  { path: 'gpx', component: ListComponent},
+  { path: 'pic', component: FormPicComponent},
+  { path: 'listPic', component: ListPicComponent}
 ];
 
 @NgModule({
