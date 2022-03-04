@@ -16,7 +16,8 @@ def show_pis():
     """Function to send pic informations under .json format"""
     return show_pic_service()
 
-@pic_route.route("/api/filter/pic/<int:filtre>/", methods=["GET"])
-def filter_pi(filtre):
+@pic_route.route("/api/filter/pic/<string:filtre>/", methods=["GET"])
+def filter_pic(filtre):
+    print("on passe ici")
     """Function to send pic informations under .json format"""
     return filter_pic_service(filtre)

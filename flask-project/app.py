@@ -5,6 +5,7 @@ from api import gpx_route
 from api import pi_route
 from api import age_route
 from api import categorie_route
+from api import pic_route
 # from api import user_route
 from services.user_service import setup_route
 
@@ -16,10 +17,7 @@ cors = CORS(
         allow_headers=["Cookie", "content-type"],
     )
 
-db_url = 
-db_name = 
-db_user = 
-db_password = 
+
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql://{db_user}:{db_password}@{db_url}/{db_name}"
@@ -39,6 +37,7 @@ app.register_blueprint(gpx_route)
 app.register_blueprint(pi_route)
 app.register_blueprint(age_route)
 app.register_blueprint(categorie_route)
+app.register_blueprint(pic_route)
 # app.register_blueprint(user_route)
 
 setup_route(app)

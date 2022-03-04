@@ -33,7 +33,12 @@ def show_pic_service():
 def filter_pic_service(filtre):
     """Function to filter pic"""
     try:
-        pic = db.session.query(PIC).filter(PIC.categorie == filtre)
+        if filtre == "restaurant":
+            pic = db.session.query(PIC).filter(PIC.categorie == "restaurant")
+        elif filtre == "bar":
+            pic = db.session.query(PIC).filter(PIC.categorie == "bar")
+        elif filtre == "hotel":
+            pic = db.session.query(PIC).filter(PIC.categorie == "hotel")
         pic = pics_schema.dump(pic)
         db.session.close()
         return jsonify(pic)
