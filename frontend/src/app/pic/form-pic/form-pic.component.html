@@ -1,14 +1,16 @@
 <div class="d-flex justify-content-center">
-    <form action="" class="d-flex flex-column">
-        <input type="text" placeholder="Nom">
-        <input type="text"placeholder="Adresse">
-        <select name="" id="">
+    <form [formGroup]="formAddPIC" class="d-flex flex-column">
+        <input type="text" formControlName="name" [(ngModel)]="name"   placeholder="Nom">
+        <input type="text" formControlName="addres" [(ngModel)]="addres" placeholder="Adresse: utiliser la loupe sur la carte">
+        <input type="text" formControlName="lat" [(ngModel)]="lat" placeholder="lat">
+        <input type="text" formControlName="lng" [(ngModel)]="lng" placeholder="lng">
+        <select formControlName="categorie" [(ngModel)]="categorie">
             <option value="">Restaurant</option>
             <option value="">Bar</option>
             <option value="">Hotel</option>
         </select>
     </form>
-    <div>
-        <div id="carte">test</div>
+    <div class="ml-3">
+        <div id="carte" class="shadow-lg p-3 mb-5 bg-body rounded">test</div>
     </div>
 </div>
