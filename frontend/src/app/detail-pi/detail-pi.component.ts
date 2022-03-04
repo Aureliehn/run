@@ -11,6 +11,8 @@ import {
 import {
   Router
 } from '@angular/router';
+import { BASE_URL } from '../global';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-detail-pi',
@@ -21,6 +23,12 @@ export class DetailPiComponent implements OnInit {
 
   @Output() public pi: RUN.PointInteret[] = []
 
+  public pic: RUN.PIC[]= []
+  public categorieSelected: string=''
+  public hotelIsVisible : boolean = false
+  public restaurantIsVisible : boolean = false
+  public barIsVisible : boolean = false
+  public allIsVisible : boolean = true
   public categories: RUN.Categorie[] = []
   public ages: RUN.Age[] = []
   public map: any
@@ -40,6 +48,7 @@ export class DetailPiComponent implements OnInit {
   });
 
   constructor(
+    private http: HttpClient,
     private router: Router
   ) {
     const navigation: any = this.router.getCurrentNavigation();
@@ -88,6 +97,22 @@ export class DetailPiComponent implements OnInit {
 
   navigateList() {
     this.router.navigateByUrl("/activity")
+  }
+  public selectResult(filtre: string) {
+    this.categorieSelected = filtre
+    this.filterBy(filtre)
+    if (filtre === 'restaurant'){
+      this.restaurantIsVisible = true
+      this.allIsVisible = false
+    }
+  }
+  public filterBy(filtre: string) {
+    this.http.get < RUN.PIC[] > (BASE_URL + `/filter/pic/${filtre}/`, {
+        withCredentials: true
+      })
+      .subscribe((response: RUN.PIC[]) => {
+        this.pic = response
+      })
   }
 
 }

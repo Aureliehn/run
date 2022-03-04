@@ -11,7 +11,7 @@
             <span class="badge rounded-pill bg-success me-2">{{ages}}</span>
             <span class="badge rounded-pill bg-danger">{{address}}</span>
           </p>
-          <p class="card-text"><span class="italic text-muted">Description :</span>  {{content}}</p>
+          <p class="card-text"><span class="italic text-muted">Description :</span> {{content}}</p>
           <p><span class="italic text-muted">Adresse :</span> {{road}} <br>{{postCode}} {{address}}</p>
         </div>
       </div>
@@ -20,3 +20,80 @@
       </div>
     </div>
   </div>
+</div>
+  <div class="d-flex justify-content-around d-wrap mt-5">
+
+    <div class="col-3" *ngIf="restaurantIsVisible">
+
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Lat</th>
+            <th scope="col">Lng</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let p of pic">
+          <tr>
+            <th scope="row">{{p.name}}</th>
+            <td>{{p.categorie}}</td>
+            <td>{{p.lat}}</td>
+            <td>{{p.lng}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3" *ngIf="hotelIsVisible">
+
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Lat</th>
+            <th scope="col">Lng</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let p of pic">
+          <tr>
+            <th scope="row">{{p.name}}</th>
+            <td>{{p.categorie}}</td>
+            <td>{{p.lat}}</td>
+            <td>{{p.lng}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3" *ngIf="barIsVisible">
+
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Lat</th>
+            <th scope="col">Lng</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let p of pic">
+          <tr>
+            <th scope="row">{{p.name}}</th>
+            <td>{{p.categorie}}</td>
+            <td>{{p.lat}}</td>
+            <td>{{p.lng}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="">
+
+      <button (click)="selectResult('restaurant')" class="mr-2 btn btn-secondary">Voir tous les resto</button>
+      <button (click)="selectResult('bar')" class="mr-2 btn btn-secondary">Voir tous les bars</button>
+      <button (click)="selectResult('hotel')" class="mr-2 btn btn-secondary">Voir tous les hôtels</button>
+    </div>
+  </div>
+
