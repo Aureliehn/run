@@ -1,4 +1,7 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mb-5">
+
+    <div class="col-10" *ngIf="allIsVisible">
+        <h4>Tous les PIC</h4>
     <table class="table table-hover">
         <thead>
           <tr>
@@ -17,4 +20,76 @@
           </tr>
         </tbody>
       </table>
+    </div>
+</div>
+<div class="d-flex justify-content-around d-wrap" >
+    <button  (click)="showAllPic()" *ngIf="!allIsVisible">Toute les catégories</button>
+    <div class="col-3">
+        <h4>Restaurant</h4>
+        <button (click)="selectResult('restaurant')">Voir</button>
+        <table class="table table-hover"*ngIf="restaurantIsVisible">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Categorie</th>
+                <th scope="col">Lat</th>
+                <th scope="col">Lng</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let p of pic">
+              <tr>
+                <th scope="row">{{p.name}}</th>
+                <td>{{p.categorie}}</td>
+                <td>{{p.lat}}</td>
+                <td>{{p.lng}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="col-3">
+        <h4>Hôtel</h4>
+        <button (click)="selectResult('hotel')">Voir</button>
+        <table class="table table-hover"*ngIf="hotelIsVisible">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Categorie</th>
+                <th scope="col">Lat</th>
+                <th scope="col">Lng</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let p of pic">
+              <tr>
+                <th scope="row">{{p.name}}</th>
+                <td>{{p.categorie}}</td>
+                <td>{{p.lat}}</td>
+                <td>{{p.lng}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="col-3">
+        <h4>Bar</h4>
+        <button (click)="selectResult('bar')">Voir</button>
+        <table class="table table-hover" *ngIf="barIsVisible">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Categorie</th>
+                <th scope="col">Lat</th>
+                <th scope="col">Lng</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let p of pic">
+              <tr>
+                <th scope="row">{{p.name}}</th>
+                <td>{{p.categorie}}</td>
+                <td>{{p.lat}}</td>
+                <td>{{p.lng}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+      
 </div>

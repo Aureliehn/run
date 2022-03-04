@@ -1,4 +1,4 @@
-from services import add_pic_service, show_pic_service
+from services import add_pic_service, show_pic_service, filter_pic_service
 from flask import Blueprint, request
 
 pic_route = Blueprint("pic_route", __name__)
@@ -13,5 +13,10 @@ def add_pic():
 @pic_route.route("/api/pic/", methods=["GET"])
 def show_pis():
     print("all pic")
-    """Function to send pis informations under .json format"""
+    """Function to send pic informations under .json format"""
     return show_pic_service()
+
+@pic_route.route("/api/filter/pic/<int:filtre>/", methods=["GET"])
+def filter_pi(filtre):
+    """Function to send pic informations under .json format"""
+    return filter_pic_service(filtre)
