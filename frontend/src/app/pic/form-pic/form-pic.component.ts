@@ -25,7 +25,7 @@ import {
   styleUrls: ['./form-pic.component.css']
 })
 export class FormPicComponent implements OnInit {
-  public addres: string = ""
+  public address: string = ""
   public formAddPIC: FormGroup;
   public name: string = ''
   public categorie: string = ''
@@ -34,10 +34,12 @@ export class FormPicComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router
   ) {
     this.formAddPIC = this.formBuilder.group({
       name: ['', Validators.required],
-      addres: ['', Validators.required],
+      address: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
       categorie: ['', Validators.required],
@@ -55,13 +57,13 @@ export class FormPicComponent implements OnInit {
     const GeocoderControl = new Geocoder();
     GeocoderControl.addTo(macarte);
     GeocoderControl.on('markgeocode', (e) => {
-      this.addres = e.geocode.name
-      this.geocode(this.addres, macarte)
+      this.address = e.geocode.name
+      this.geocode(this.address, macarte)
     })
   }
 
   public async geocode(adresse: any, map: any) {
-    this.addres = adresse
+    this.address = adresse
     let url = `https://nominatim.openstreetmap.org/search/?format=json&addressdetails=1&q=${adresse}`;
     let resp = await fetch(url);
     let datas = await resp.json();
@@ -72,5 +74,29 @@ export class FormPicComponent implements OnInit {
     L.marker(lat, lng).addTo(map);
     map.flyTo([lat, lng], 8);
     
+  }
+  public addPIC() {
+    this.http.post(BASE_URL + '/pic/add_pic/', {
+        name: this.name,
+        address: this.address,
+        categorie: this.categorie,
+        lat: this.lat,
+        lng: this.lng,
+
+      }, {
+        withCredentials: true,
+      })
+      .subscribe({
+        next: () => this.router.navigateByUrl("/"),
+        error: (e) => console.log(e)
+      })
+  }
+  submit(): void {
+    if (this.formAddPIC.valid) {
+      console.log('hello')
+      this.addPIC()
+    } else {
+      console.log("bop", this.name, this.lat, this.lng, this.address, this.categorie)
+    }
   }
 }

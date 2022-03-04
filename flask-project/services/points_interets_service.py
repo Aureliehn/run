@@ -5,7 +5,7 @@ from model import PointsInterets, pointssInterets_schema, pointsInterets_schema
 import json
 
 def add_pi_service(pi_data):
-    """Function to add a new ticket"""
+    """Function to add a new pi"""
     try:
         new_pi = PointsInterets(**pi_data)
         db.session.add(new_pi)
