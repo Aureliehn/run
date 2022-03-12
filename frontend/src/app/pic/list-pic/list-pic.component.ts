@@ -86,24 +86,6 @@ export class ListPicComponent implements OnInit {
           this.pic = response
         })
     }
-    public doc = new jsPDF();
-    generatePdf() {
-      var pdf = new jsPDF();
 
-      pdf.setFontSize(10);
-      pdf.text('Liste PIC', 11, 8);
-      pdf.setFontSize(12);
-      pdf.setTextColor(99);
-
-
-      (pdf as any).autoTable({
-      head: this.header,
-      body: this.tableData,
-      theme: 'grid',
-      fillColor: '#b2dfdb'
-      })
-      pdf.output('dataurlnewwindow')
-      pdf.save('table.pdf');
-  }  
   }
 

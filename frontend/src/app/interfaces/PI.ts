@@ -21,7 +21,7 @@ export namespace RUN {
       lat: number
       lng: number
       creation_date: Date
-  
+      active: boolean
       age: Age
       categorie: Categorie
     

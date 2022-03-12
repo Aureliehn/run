@@ -5,19 +5,16 @@ import {
 import * as L from 'leaflet';
 window.L = L
 import Geocoder from 'leaflet-control-geocoder';
-import 'leaflet-easyprint'
-
-
+import 'leaflet-gpx';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-list2',
+  templateUrl: './list2.component.html',
+  styleUrls: ['./list2.component.css']
 })
-export class ListComponent implements OnInit {
-  constructor() {
+export class List2Component implements OnInit {
 
-  }
+  constructor() { }
 
   ngOnInit(): void {
     const centre = {
@@ -35,18 +32,16 @@ export class ListComponent implements OnInit {
 
 
     const mapGpx = L.map('mapGpx').setView(centre, 5);
-
+    const distance : number = 0
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    })
-    .addTo(mapGpx);
+    }).addTo(mapGpx);
 
     const GeocoderControl = new Geocoder();
     GeocoderControl.addTo(mapGpx);
     GeocoderControl.on('markgeocode', function (e) {
       console.log(e);
     })
-
 
     this.getLocation()
 
@@ -56,13 +51,12 @@ export class ListComponent implements OnInit {
       var afficherAltHaute= document.getElementById('altPlusHaute')
       var afficherAltBasse= document.getElementById('altPlusBasse')
       var afficherPerteAlt= document.getElementById('perteAlt')
-      var gpx = 'assets/gpx/gpx1.gpx'; 
+      var gpx = 'assets/gpx/PARIS.gpx'; 
       new L.GPX(gpx, {
         async: true,
         marker_options: {
           startIconUrl : 'assets/images/markerGreen.png'
         }
-        
       }).on('loaded', function (e) {
         mapGpx.fitBounds(e.target.getBounds(), e.target.get_elevation_gain());
         var denivele = e.target.get_elevation_gain()
@@ -87,22 +81,6 @@ export class ListComponent implements OnInit {
       })
       .addTo(mapGpx);
     })
-  
-
-
-    // var url = 'assets/gpx/gpx1.gpx'; 
-    // new L.GPX(url, {
-    //   async: true,
-    //   marker_options: {
-    //     startIconUrl: 'assets/images/markerGreen.png',
-    //     endIconUrl: 'assets/images/markerRed.png',
-    //     shadowUrl: 'assets/images/markerGreen.png'
-    //   }
-    // }).on('loaded', function (e) {
-    //   mapGpx.fitBounds(e.target.getBounds(), e.target.get_distance())
-    //   var distance = e.target.get_distance()
-    //   console.log(distance, 'distance')
-    // }).addTo(mapGpx);
 
   }
 

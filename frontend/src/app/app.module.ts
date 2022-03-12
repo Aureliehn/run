@@ -19,6 +19,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { LogoutComponent } from './logout/logout.component';
 import { FormPicComponent } from './pic/form-pic/form-pic.component';
 import { ListPicComponent } from './pic/list-pic/list-pic.component';
+import { List2Component } from './list2/list2.component';
+
 
 
 
@@ -36,7 +38,8 @@ import { ListPicComponent } from './pic/list-pic/list-pic.component';
     RegistrationComponent,
     LogoutComponent,
     FormPicComponent,
-    ListPicComponent
+    ListPicComponent,
+    List2Component,
 
   ],
   imports: [

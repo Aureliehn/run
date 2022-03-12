@@ -152,6 +152,7 @@ export class FormComponent implements OnInit {
         lat: this.lat,
         lng: this.lng,
         content: this.content,
+        active: false
       }, {
         withCredentials: true,
       })

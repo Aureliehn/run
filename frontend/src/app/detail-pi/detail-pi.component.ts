@@ -32,6 +32,11 @@ export class DetailPiComponent implements OnInit {
   public restaurantIsVisible : boolean = false
   public barIsVisible : boolean = false
   public allIsVisible : boolean = true
+  public isNature : boolean = false
+  public paris : boolean = false
+  public changeMap : boolean = false
+  public changeMap2 : boolean = false
+
   public categories: RUN.Categorie[] = []
   public ages: RUN.Age[] = []
   public map: any
@@ -114,6 +119,7 @@ export class DetailPiComponent implements OnInit {
     }).addTo(this.map);
     marker.bindPopup("L'activité se trouve ici").openPopup();
     this.showAllPic()
+    this.showParcours()
   }
 
   navigateList() {
@@ -155,7 +161,7 @@ export class DetailPiComponent implements OnInit {
       var pdf = new jsPDF();
 
       pdf.setFontSize(10);
-      pdf.text('Activité', 11, 8);
+      pdf.text('Activité : '+ this.title, 11, 8);
       pdf.setFontSize(12);
       pdf.setTextColor(99);
 
@@ -169,4 +175,21 @@ export class DetailPiComponent implements OnInit {
       pdf.output('dataurlnewwindow')
       pdf.save('table.pdf');
   }  
+  
+  public showParcours(){
+    if(this.id === 2){
+      this.isNature = true
+    }
+    else if(this.id === 3){
+      this.paris = true
+    }
+  }
+  public clickShowParcours(){
+    this.changeMap = true
+  }
+  public clickShowParcours2(){
+    this.changeMap2 = true
+  }
+
 }
+

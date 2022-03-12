@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from './sso.config'; 
+import { authCodeFlowConfig } from './sso.config'
+
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
   constructor(
     private oauthService: OAuthService
   ) { 
+
     // this.configureSingleSinOn()
   }
 

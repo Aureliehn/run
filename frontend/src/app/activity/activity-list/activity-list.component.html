@@ -13,11 +13,11 @@
               <option *ngFor="let c of categories" (click)="selectResult(c.id, 1)">{{c.name}}</option>
             </select>
             <!-- <label for="" class="italic amber mt-3 ">Quel âge?</label> -->
-            <select class="form-control">
+            <!-- <select class="form-control">
               <option (click)="printListPiService(map)">0 à 80</option>
               <option value="" *ngFor="let a of ages" (click)="selectResult(categorieSelected, a.id)">{{a.name}}
               </option>
-            </select>
+            </select> -->
             <div class="mb-3 mt-4"> <input type="text" [(ngModel)]="address" name='address' class="input_address"
                 placeholder="Entrez une adressse">
               <button (click)="geocode(address, map)" class="btn-pink-outline mx-2 mb-5 mt-2">Trouver l'adresse</button>

@@ -1,10 +1,11 @@
 <div class="d-flex justify-content-center">
+
   <div class="d-flex justify-content-evenly align-items-center bg-blue col-11 br-10">
-    <div class="col-6 mx-4 my-5 h-550px br-10" id="map"></div>
+      <div class="col-6 mx-4 my-5 h-550px br-10" id="map"></div>
+     
     <div class="col-4">
       <div class="card ">
         <div class="card-body ">
-
           <h5 class="card-title amber">{{title}}</h5>
           <p>
             <span class="badge rounded-pill bg-info text-dark me-2">{{categories}}</span>
@@ -15,14 +16,23 @@
           <p><span class="italic text-muted">Adresse :</span> {{road}} <br>{{postCode}} {{address}}</p>
         </div>
       </div>
-      <div class="mt-4">
+      <div class="mt-4 mb-2">
         <button class="btn-first" (click)="navigateList()">Retour</button>
+        <button *ngIf="isNature" (click)="clickShowParcours()" class="btn-first buttonGpx">Voir le parcours</button>
+        <button *ngIf="paris" (click)="clickShowParcours2()" class="btn-first buttonGpx">Voir le parcours</button>
+
       </div>
     </div>
   </div>
 </div>
+<div *ngIf="changeMap" class="divMapGpx col-12">
+  <app-list></app-list>
+</div>
+<div *ngIf="changeMap2" class="divMapGpx col-12">
+  <app-list2></app-list2>
+</div>
   <div class="d-flex justify-content-around d-wrap mt-5">
-
+ 
     <div class="col-3" *ngIf="restaurantIsVisible">
 
 
@@ -89,7 +99,7 @@
         </tbody>
       </table>
     </div>
-    <div class="">
+    <div class="mb-3">
 
       <button (click)="selectResult('restaurant')" class="mr-2 btn btn-secondary">Voir tous les resto</button>
       <button (click)="selectResult('bar')" class="mr-2 btn btn-secondary">Voir tous les bars</button>

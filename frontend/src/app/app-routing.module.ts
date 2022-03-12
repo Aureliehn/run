@@ -4,6 +4,7 @@ import { ActivityListComponent } from './activity/activity-list/activity-list.co
 import { AuthComponent } from './auth/auth.component';
 import { DetailPiComponent } from './detail-pi/detail-pi.component';
 import { HomeComponent } from './home/home.component';
+import { List2Component } from './list2/list2.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FormComponent } from './path/form/form.component';
 import { ListComponent } from './path/list/list.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'auth', component: AuthComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'gpx', component: ListComponent},
+  { path: 'gpxU', component: ListComponent},
+  { path: 'gpxP', component: List2Component},
   { path: 'pic', component: FormPicComponent},
   { path: 'listPic', component: ListPicComponent}
 ];
